@@ -1,0 +1,26 @@
+{% extends "base.html"  %}
+{% block 'content' %}
+<table class="table table-striped table-hover">
+<thead>
+	<tr><th>Nr. ST</th><th>Nazwa</th><th></th></tr>
+</thead>
+{% for st in object_list %}
+{% if user.pk == st.owner.pk %}
+<tr><td> ST-{{ st.nr_st }}</td><td> {{ st.name }}</td><td><div class="btn-group">
+  <a href="#" class="btn btn-default">Akcja</a>
+  <a aria-expanded="false" href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><a href="#">Podląd</a></li>
+    <li><a href="#">Edytuj</a></li>
+    <li><a href="{% url 'delete-st' pk=st.id %}">Usuń</a></li>
+    <li class="divider"></li>
+    <li><a href="{% url 'add-stc' nr_st=st.nr_st %}">Dodaj STC</a></li>
+  </ul>
+</div></td></tr>
+<tr><td>{% block stc %} 
+{% endblock stc %}</td></tr>
+{% endif %}
+{% endfor %}
+</table>
+<a href="{% url 'create-st' %}" class="btn btn-default">Dodaj ST</a>
+{% endblock %}

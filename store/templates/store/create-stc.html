@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block 'content' %}
+    <h1>Dodaj STC</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+    	<table>
+        <tr><td>Nazwa:</td><td> {{ form.name }}</td></tr>
+        <tr><td>Nr. STC:</td><td> {{ form.nr_stc}}</td></tr>
+        <tr><td>Data:</td><td> {{ form.data_przyjecia}}</td></tr>
+        </table>
+        <button type="submit" class="save btn btn-default">Dadaj</button>
+    </form>
+   {% block javascript %}
+   <script>
+   $( document ).ready( function(){
+    $( function() {
+
+    $( '#datepicker' ).datepicker({ datepicker: true });
+				} );
+}); ( jQuery );
+
+  </script>
+   {% endblock%}
+{% endblock %}

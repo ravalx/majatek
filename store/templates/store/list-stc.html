@@ -1,0 +1,12 @@
+{% extends "base.html"  %}
+{% block 'content' %}
+<p>asdasdasd</p>
+{% for stc in object_list %}
+
+ 
+    <p>{{ stc.name }}</p>
+ 
+
+{% endfor %}
+<a href="{% url 'create-st' %}" class="btn btn-default">Dodaj ST</a>
+{% endblock  %}
