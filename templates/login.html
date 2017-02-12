@@ -3,7 +3,7 @@
 
 {% block 'content' %}
     {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>Nazwa użytkownika lub hasło są niepoprawne, spróbuj zalogować się jeszcze raz.</p>
 {% endif %}
 
 {% if next %}
@@ -11,7 +11,7 @@
     <p>Your account doesn't have access to this page. To proceed,
     please login with an account that has access.</p>
     {% else %}
-    <p>Please login to see this page.</p>
+    <p>Aby zobaczyć treść musisz się zalogować.</p>
     {% endif %}
 {% endif %}
  <div class="container">

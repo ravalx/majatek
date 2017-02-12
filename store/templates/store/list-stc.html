@@ -1,12 +1,12 @@
 {% extends "base.html"  %}
 {% block 'content' %}
-<p>asdasdasd</p>
+ <table class="table table-striped table-hover">
 {% for stc in object_list %}
 
- 
-    <p>{{ stc.name }}</p>
+    <tr><td>{{ stc.nr_st.nr_st }}</td><td> {{ stc.nr_stc }}</td><td> {{ stc.name }}</td> <td>{{ stc.data_przyjecia }}</td></tr>
  
 
 {% endfor %}
-<a href="{% url 'create-st' %}" class="btn btn-default">Dodaj ST</a>
+</table>
 {% endblock  %}
+

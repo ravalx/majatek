@@ -12,5 +12,5 @@ url(r'^delete-st/(?P<pk>\d+)/$', DelSt.as_view(), name='delete-st'),
 url(r'^$', login_required(StListView.as_view(), login_url="login/"), name='list-st'),
 url(r'^add-stc/(?P<nr_st>\d+)/$', views.add_stc, name='add-stc'),
 #url(r'^add-stc/(?P<pk>\d+)/$', views.add_stc, name='add-stc'),
-url(r'^list-stc/', StcListView.as_view(), name='list-stc')
+url(r'^list-stc/', login_required(StcListView.as_view(), login_url="/"), name='list-stc')
 ]
