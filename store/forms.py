@@ -1,5 +1,5 @@
 from django import forms
-from .models import NrStc
+from .models import NrStc, NrSt
 
 
 class AddStc(forms.ModelForm):
@@ -11,4 +11,16 @@ class AddStc(forms.ModelForm):
 		fields = ['nr_stc','name', 'data_przyjecia']
 		widgets = {
             'data_przyjecia': forms.DateInput(attrs={'id':'datepicker'}),
+            'uwagi': forms.CharField(widget=forms.Textarea),
         }
+
+class AddSt(forms.ModelForm):
+	class Meta:
+		model = NrSt
+		fields = ['nr_st', 'name', 'dzierzawca', 'place', 'price', 'data_przyjecia', 'uwagi']
+		widgets = {
+			'data_przyjecia': forms.DateInput(attrs={'id':'datepicker'}),
+			
+		}
+	
+	

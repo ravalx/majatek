@@ -1,7 +1,42 @@
+
 {% extends "base.html"  %}
+{% comment %}
 {% block 'content' %}
 <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
     {{ form.as_ul}}
     <input type="submit" value="Save" />
 </form>
+{% endblock %}
+{% endcomment %}
+
+
+{% block 'content' %}
+    <h1>Dodaj ST</h1>
+    <form  method="POST" class="form-horizontal">{% csrf_token %}
+     <fieldset>
+    	<table>
+    	<tr><td>Nr. ST:</td><td> {{ form.nr_st}}</td></tr>
+        <tr><td>Nazwa:</td><td> {{ form.name }}</td></tr>
+        <tr><td>Cena:</td><td> {{ form.price}}</td></tr>
+        <tr><td>Data:</td><td> {{ form.data_przyjecia}}</td></tr>
+        <tr><td>Użytkownik:</td><td> {{ form.dzierzawca}}</td></tr>
+        <tr><td>Miejsce użytkowania:</td><td> {{ form.place}}</td></tr>
+        <tr><td>Uwagi:</td><td> {{ form.uwagi }}</td></tr>
+        </table>
+        <button type="submit" class="save btn btn-default">Dadaj</button>
+        <button type="reset" class="save btn btn-default">Wyczyść</button>
+        <button type="" class="save btn btn-default">Anuluj</button>
+    </form>
+     <fieldset>
+   {% block javascript %}
+   <script>
+   $( document ).ready( function(){
+    $( function() {
+
+    $( '#datepicker' ).datepicker({ datepicker: true, dateFormat: 'dd.mm.yy' });
+				} );
+}); ( jQuery );
+
+  </script>
+   {% endblock%}
 {% endblock %}
