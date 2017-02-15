@@ -1,0 +1,13 @@
+{% extends "base.html"  %}
+
+{% block 'content' %}
+<h3>Składnik {{ object.name }} o numerze ST-{{ object.nr_st }}</h3>
+<table class="table">
+<tr><td>Data przyjęcia</td><td>{{ object.data_przyjecia }}</td></tr>
+<tr><td>Cena:</td><td>{{ object.price }} zł</td></tr>
+<tr><td>Miejsce:</td><td>{{ object.place }}</td></tr>
+<tr><td>Użytkownik:</td><td>{{ object.dzierzawca }}</td></tr>
+<tr><td>Uwagi:</td><td>{{ object.uwagi }}</td></tr>
+</table>
+<button type="" class="btn btn-default" onclick="location.href='/'">Wróć</button>
+{% endblock %}

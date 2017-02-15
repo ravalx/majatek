@@ -8,7 +8,7 @@ class NrSt(models.Model):
 	nr_st = models.CharField(max_length = 9, unique=True)
 	name = models.CharField(max_length = 255)
 	data_przyjecia = models.DateField(default=date.today)
-	price = models.FloatField(null = True, blank=True)
+	price = models.DecimalField(null = True, blank=True, max_digits = 20, decimal_places = 2)
 	uwagi = models.TextField(null = True, blank=True)
 	dzierzawca = models.CharField(max_length = 255, null = True, blank=True)
 	place = models.CharField(max_length = 255, null = True, blank=True)
@@ -22,10 +22,11 @@ class NrStc(models.Model):
 	nr_stc = models.CharField(max_length = 9, unique=True)
 	name = models.CharField(max_length = 255)
 	data_przyjecia = models.DateField(default=date.today)
-	price = models.FloatField(null = True)
+	price = models.DecimalField(null = True, blank=True, max_digits = 20, decimal_places = 2)
 	uwagi = models.TextField(null=True)
 	dzierzawca = models.CharField(max_length = 255, null = True)
 	place = models.CharField(max_length = 255, null = True, blank = True)
+	photo = models.ImageField()
 
 	def __str__(self):
 		return self.name

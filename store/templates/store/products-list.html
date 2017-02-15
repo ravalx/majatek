@@ -15,7 +15,7 @@
   <a href="#" class="btn btn-default">Akcja</a>
   <a aria-expanded="false" href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
   <ul class="dropdown-menu">
-    <li><a href="#">Podląd</a></li>
+    <li><a href="{% url 'detail-view-st' pk=st.id %}">Podląd</a></li>
     <li><a href="#">Edytuj</a></li>
     <li><a href="{% url 'delete-st' pk=st.id %}">Usuń</a></li>
     <li class="divider"></li>
@@ -34,9 +34,5 @@
 
 {% endfor %}
 </table>
-
-
-
-<a href="{% url 'create-st' %}" class="btn btn-default">Dodaj ST</a>
 {% endblock %}
 

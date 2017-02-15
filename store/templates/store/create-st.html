@@ -8,35 +8,89 @@
 </form>
 {% endblock %}
 {% endcomment %}
-
-
-{% block 'content' %}
-    <h1>Dodaj ST</h1>
-    <form  method="POST" class="form-horizontal">{% csrf_token %}
-     <fieldset>
-    	<table>
-    	<tr><td>Nr. ST:</td><td> {{ form.nr_st}}</td></tr>
-        <tr><td>Nazwa:</td><td> {{ form.name }}</td></tr>
-        <tr><td>Cena:</td><td> {{ form.price}}</td></tr>
-        <tr><td>Data:</td><td> {{ form.data_przyjecia}}</td></tr>
-        <tr><td>Użytkownik:</td><td> {{ form.dzierzawca}}</td></tr>
-        <tr><td>Miejsce użytkowania:</td><td> {{ form.place}}</td></tr>
-        <tr><td>Uwagi:</td><td> {{ form.uwagi }}</td></tr>
-        </table>
-        <button type="submit" class="save btn btn-default">Dadaj</button>
-        <button type="reset" class="save btn btn-default">Wyczyść</button>
-        <button type="" class="save btn btn-default">Anuluj</button>
-    </form>
-     <fieldset>
-   {% block javascript %}
+{% block javascript %}
    <script>
+ /*$("#id_nr_st").change(function () {
+      var nr_st = $(this).val();
+
+      $.ajax({
+        url: '/ajax/validate_nr_st/',
+        data: {
+          'nr_st': nr_st
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("Numer St podany przez Ciebie już intieje!.");
+          }
+        }
+      });
+
+    });*/
+
+ $("#id_nr_st").change(function () {
+      var form = $(this).closest("form");
+      $.ajax({
+        url: form.attr("data-validate-username-url"),
+        data: form.serialize(),
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert(data.error_message);
+            $("#id_nr_st").val('');
+          }
+        }
+      });
+
+    });
+/*------------------------------------------------------------*/
+
    $( document ).ready( function(){
     $( function() {
 
-    $( '#datepicker' ).datepicker({ datepicker: true, dateFormat: 'dd.mm.yy' });
-				} );
+    $( '#datepicker' ).datepicker({ datepicker: true, dateFormat: 'dd.mm.yy', changeYear: true, monthNames: [ "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień" ] });
+                } );
 }); ( jQuery );
 
   </script>
    {% endblock%}
+
+{% block 'content' %}
+ 
+    
+    <div class="col-lg-7">
+    <form  method="POST" data-validate-username-url = "{% url 'validate_nr_st' %}" class="form-horizontal">{% csrf_token %}
+     <fieldset>
+    <legend>Dodaj składnik - ST</legend>
+    <div class="form-group">
+      <label  class="col-lg-2 control-label">Nr. ST:</label>
+      <div class="col-lg-10">{{ form.nr_st }}</div>
+      <label  class="col-lg-2 control-label">Nazwa:</label>
+      <div class="col-lg-10">{{ form.name }}</div>
+      <label  class="col-lg-2 control-label">Cena:</label>
+      <div class="col-lg-10">{{ form.price }}</div>
+      <label  class="col-lg-2 control-label">Data:</label>
+      <div class="col-lg-10">{{ form.data_przyjecia }}</div>
+      <label  class="col-lg-2 control-label">Użytkownik:</label>
+      <div class="col-lg-10">{{ form.dzierzawca }}</div>
+      <label  class="col-lg-2 control-label">Miejsce</label>
+      <div class="col-lg-10">{{ form.place }}</div>
+      <label  class="col-lg-2 control-label">Uwagi:</label>
+      <div class="col-lg-10">{{ form.uwagi }}</div>
+    </div>
+  <div class="form-group">
+      <div class="col-lg-10">
+      <button type="submit" class="btn btn-primary col-lg-offset-3">Zapisz</button>
+        <button type="reset" class="btn btn-default">Wyczyść</button>
+        <button type="reset" class="btn btn-default" onclick="location.href='/'">Anuluj</button>
+        
+      </div>
+    </div>
+      
+        </fieldset>
+    </form>
+    </div>
+    <div class="col-lg-5"></div>
+   
+   
 {% endblock %}

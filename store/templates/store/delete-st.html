@@ -1,4 +1,8 @@
+{% extends "base.html"  %}
+{% block 'content' %}
 <form action="" method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm" />
+    <h3>Czy na pewno chcesz usunąć składnik <strong>{{object.name}}</strong> o nr. ST-{{ object.nr_st }}?</h3>
+    <input type="submit" value="Usuń" />
+    <input type="button" value="Anuluj" onClick="javascript:history.go(-1);" />
 </form>
+{% endblock %}
