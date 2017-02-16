@@ -67,6 +67,7 @@ def add_stc(request, nr_st):
 	return render(request, 'store/create-stc.html', {'form':form})
 
 def add_st(request):
+	form = AddSt()
 	if request.method == 'POST':
 		form = AddSt(request.POST)
 		if form.is_valid():
@@ -74,7 +75,7 @@ def add_st(request):
 			st.owner = request.user
 			st.save()
 			return HttpResponseRedirect('/')
-	form = AddSt
+	#form = AddSt()
 	return render(request, 'store/create-st.html', {'form':form})
 
 def validate_nr_st(request):

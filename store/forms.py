@@ -1,5 +1,6 @@
 from django import forms
 from .models import NrStc, NrSt
+import re
 
 
 class AddStc(forms.ModelForm):
@@ -13,6 +14,9 @@ class AddStc(forms.ModelForm):
             'data_przyjecia': forms.DateInput(attrs={'id':'datepicker'}),
             'uwagi': forms.CharField(widget=forms.Textarea),
         }
+
+	
+
 
 class AddSt(forms.ModelForm):
 	class Meta:
@@ -29,5 +33,21 @@ class AddSt(forms.ModelForm):
 			'dzierzawca': forms.TextInput(attrs={'class':'form-control'}),
 			'uwagi': forms.Textarea(attrs={'class':'form-control'}),
 		}
+
+	def clean_price(self):
+		price = self.cleaned_data['price']
+		ok = re.match(r'^\d*\.\d{2}$', str(price))
+		if not ok:
+			raise forms.ValidationError('Podaj miejsca dziesiętne')
+		return price
+
+	def clean_nr_st(self):
+		nr_st = self.cleaned_data['nr_st']
+		if len(nr_st) < 9:
+			raise forms.ValidationError('Numer ST jest za krótki!')
+		ok = re.match(r'^\d+$', nr_st)
+		if not ok:
+			raise forms.ValidationError('Pole powinno zawierać tylko cyfry')
+		return nr_st
 	
 	
