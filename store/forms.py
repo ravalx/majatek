@@ -1,5 +1,5 @@
 from django import forms
-from .models import NrStc, NrSt
+from .models import NrStc, NrSt, Upload
 import re
 
 
@@ -49,5 +49,11 @@ class AddSt(forms.ModelForm):
 		if not ok:
 			raise forms.ValidationError('Pole powinno zawierać tylko cyfry')
 		return nr_st
+
+class UploadFileForm(forms.ModelForm):
+	class Meta:
+		model = Upload
+		fields = ['upload']
+	#upload = forms.FileField()
 	
 	

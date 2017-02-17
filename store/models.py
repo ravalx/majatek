@@ -34,3 +34,6 @@ class NrStc(models.Model):
 
 	def __str__(self):
 		return self.name
+
+class Upload(models.Model):
+	upload = models.FileField(upload_to='upload/')

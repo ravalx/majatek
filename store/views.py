@@ -3,8 +3,12 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from .models import NrSt, NrStc
 from django.urls import reverse_lazy
-from .forms import AddStc, AddSt
+from .forms import AddStc, AddSt, UploadFileForm
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from .upload import handle_files
+import io
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 class CreateSt(CreateView):
 	template_name = 'store/create-st.html'
@@ -86,6 +90,22 @@ def validate_nr_st(request):
 	if data['is_taken']:
 			data['error_message'] = 'Podany przez Ciebie numer St już istnieje w bazie!'
 	return JsonResponse(data)
+
+def upload_file(request):
+	if request.method == 'POST':
+		form = UploadFileForm(request.POST, request.FILES)
+		if form.is_valid():
+			myfile = request.FILES['upload']
+			fs = FileSystemStorage()
+			filename = fs.save(myfile.name, myfile)
+			uploaded_file_url = fs.url(filename)
+			handle_files(settings.MEDIA_ROOT+'/'+str(myfile))
+			return HttpResponseRedirect('/success/')
+	else:
+		form = UploadFileForm()
+	return render (request, 'store/upload.html', {'form':form })
+
+
 
 
 

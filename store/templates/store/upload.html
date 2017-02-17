@@ -1,0 +1,27 @@
+
+{% extends "base.html"  %}
+
+{% block 'content' %}
+ 
+    <form  method="POST" enctype="multipart/form-data" class="form-horizontal" >{% csrf_token %}
+     <fieldset>
+    <legend>Dodaj składnik - ST</legend>
+    <div class="form-group">
+ 
+      <label  class="col-lg-2 control-label">Upload:</label>
+      <div class="col-lg-10">{{ form.upload }}</div>
+    </div>
+  <div class="form-group">
+      <div class="col-lg-10">
+      <button type="submit" class="btn btn-primary col-lg-offset-3">Zapisz</button>
+        <button type="reset" class="btn btn-default">Wyczyść</button>
+        <button type="reset" class="btn btn-default" onclick="location.href='/'">Anuluj</button>
+        
+      </div>
+    </div>
+      
+        </fieldset>
+    </form>
+    </div>
+    <div class="col-lg-5"></div> 
+{% endblock %}

@@ -16,4 +16,5 @@ url(r'^add-stc/(?P<nr_st>\d+)/$', views.add_stc, name='add-stc'),
 #url(r'^add-stc/(?P<pk>\d+)/$', views.add_stc, name='add-stc'),
 url(r'^list-stc/', login_required(StcListView.as_view(), login_url="/"), name='list-stc'),
 url(r'^ajax/validate_nr_st/$', views.validate_nr_st, name='validate_nr_st'),
+url(r'^upload/$', views.upload_file, name='upload-file'),
 ]
